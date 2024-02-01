@@ -8,7 +8,7 @@ import { Alert, Button, Image, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import OutlinedButton from "../UI/OutlinedButton";
 
-export default function ImagePicker() {
+export default function ImagePicker({ onSelecteImageHandler }) {
   const [cameraPermissionInfo, requestPermission] = useCameraPermissions();
   const [pickedImage, setPickedImage] = useState();
 
@@ -45,7 +45,9 @@ export default function ImagePicker() {
     });
     // console.log(image);
     if (!image.canceled) {
-      setPickedImage(image.assets[0].uri);
+      const imgUri = image.assets[0].uri;
+      setPickedImage(imgUri);
+      onSelecteImageHandler(imgUri);
     }
   }
 
